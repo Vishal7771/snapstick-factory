@@ -12,13 +12,13 @@ import { FileSpreadsheet, Loader2 } from 'lucide-react';
 const Index = () => {
   const [stickerData, setStickerData] = useState<StickerData[]>([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [width, setWidth] = useState(70); // mm
+  const [width, setWidth] = useState(50); // mm - reduced to fit 4 columns
   const [height, setHeight] = useState(40); // mm
-  const [columns, setColumns] = useState(2);
+  const [columns, setColumns] = useState(4); // Changed to 4 columns
   const [rows, setRows] = useState(4);
-  const [nameFontSize, setNameFontSize] = useState(14);
-  const [mrpFontSize, setMrpFontSize] = useState(10);
-  const [priceFontSize, setPriceFontSize] = useState(18);
+  const [nameFontSize, setNameFontSize] = useState(12);
+  const [mrpFontSize, setMrpFontSize] = useState(8);
+  const [priceFontSize, setPriceFontSize] = useState(16);
   const { toast } = useToast();
   
   const handleFileProcessed = useCallback(async (file: File) => {
@@ -126,7 +126,7 @@ const Index = () => {
             <div className="bg-white rounded-xl shadow-sm border p-6">
               <h2 className="text-lg font-semibold mb-4">Print Layout (A4)</h2>
               
-              <div className="overflow-auto p-4 bg-gray-50 rounded-lg max-h-[500px]">
+              <div className="p-4 bg-gray-50 rounded-lg">
                 <StickersGrid 
                   data={stickerData}
                   width={width}

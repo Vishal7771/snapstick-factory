@@ -19,7 +19,7 @@ export const defaultPrintSettings: PrintSettings = {
   orientation: 'portrait',
   width: 210, // A4 width in mm
   height: 297, // A4 height in mm
-  columns: 2,
+  columns: 4,  // Updated to 4 columns
   rows: 4,
   margins: {
     top: 10,
@@ -66,7 +66,7 @@ export const printStickers = (printAreaId: string): void => {
           }
           
           .sticker {
-            border: 1px solid #222;
+            border: 1px solid #000000e6;
             border-radius: 4px;
             padding: 0.5rem;
             text-align: center;
@@ -76,13 +76,13 @@ export const printStickers = (printAreaId: string): void => {
           
           .sticker-name {
             font-weight: bold;
-            color: #333;
+            color: #000000e6;
             margin-bottom: 0.25rem;
             font-size: 0.9rem;
           }
           
           .sticker-mrp {
-            color: #666;
+            color: #0006;
             text-decoration: line-through;
             font-size: 0.8rem;
           }

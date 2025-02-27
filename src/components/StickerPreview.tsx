@@ -33,12 +33,16 @@ const StickerPreview: React.FC<StickerPreviewProps> = ({
         width: `${width}mm`, 
         height: `${height}mm`,
         padding: `${Math.max(4, height / 10)}mm`,
-        maxWidth: '100%'
+        maxWidth: '100%',
+        border: '1px solid #000000e6',
       }}
     >
       <div 
         className="sticker-name"
-        style={{ fontSize: `${calculatedNameFontSize}px` }}
+        style={{ 
+          fontSize: `${calculatedNameFontSize}px`,
+          color: '#000000e6' 
+        }}
       >
         {name}
       </div>
@@ -46,7 +50,10 @@ const StickerPreview: React.FC<StickerPreviewProps> = ({
       <div className="flex flex-col items-center justify-center">
         <div 
           className="sticker-mrp"
-          style={{ fontSize: `${calculatedMrpFontSize}px` }}
+          style={{ 
+            fontSize: `${calculatedMrpFontSize}px`,
+            color: '#0006' 
+          }}
         >
           MRP {formatCurrency(mrp)}
         </div>
