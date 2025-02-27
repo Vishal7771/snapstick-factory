@@ -124,10 +124,7 @@ const Index = () => {
             </div>
             
             <div className="bg-white rounded-xl shadow-sm border p-6">
-              <h2 className="text-lg font-semibold mb-4">Print Layout</h2>
-              <p className="text-sm text-gray-500 mb-4">
-                {columns} x {rows} grid with {columns * rows} stickers per page
-              </p>
+              <h2 className="text-lg font-semibold mb-4">Print Layout (A4)</h2>
               
               <div className="overflow-auto p-4 bg-gray-50 rounded-lg max-h-[500px]">
                 <StickersGrid 
