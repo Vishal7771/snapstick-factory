@@ -23,29 +23,29 @@ export const processExcelFile = async (file: File): Promise<StickerData[]> => {
         // Convert the worksheet to JSON
         const jsonData = XLSX.utils.sheet_to_json(worksheet);
         
+        console.log("Extracted JSON data:", jsonData);
+        console.log("Column keys:", jsonData.length > 0 ? Object.keys(jsonData[0]) : "No data rows found");
+        
+        if (jsonData.length === 0) {
+          throw new Error('No data found in the Excel file');
+        }
+        
         // Transform the data into our required format
         const stickerData: StickerData[] = jsonData.map((row: any) => {
-          // Try to find the correct column names regardless of case
-          const nameKey = Object.keys(row).find(key => 
-            key.toLowerCase() === 'name' || 
-            key.toLowerCase() === 'item name' || 
-            key.toLowerCase() === 'product name'
-          );
+          // Try to find the correct column names regardless of case or whitespace
+          const nameKey = findMatchingKey(row, ['name', 'item name', 'product name', 'product']);
+          const mrpKey = findMatchingKey(row, ['mrp', 'maximum retail price', 'retail price', 'max price']);
+          const sellPriceKey = findMatchingKey(row, ['sell price', 'selling price', 'price', 'sale price', 'sell']);
           
-          const mrpKey = Object.keys(row).find(key => 
-            key.toLowerCase() === 'mrp' || 
-            key.toLowerCase() === 'maximum retail price' || 
-            key.toLowerCase() === 'retail price'
-          );
-          
-          const sellPriceKey = Object.keys(row).find(key => 
-            key.toLowerCase() === 'sell price' || 
-            key.toLowerCase() === 'selling price' || 
-            key.toLowerCase() === 'price' || 
-            key.toLowerCase() === 'sale price'
-          );
+          console.log("Found keys:", { nameKey, mrpKey, sellPriceKey });
           
           if (!nameKey || !mrpKey || !sellPriceKey) {
+            console.error("Column mapping:", { 
+              availableKeys: Object.keys(row), 
+              nameKey, 
+              mrpKey, 
+              sellPriceKey 
+            });
             throw new Error('Required columns (Name, MRP, Sell Price) not found in the Excel file');
           }
           
@@ -58,6 +58,7 @@ export const processExcelFile = async (file: File): Promise<StickerData[]> => {
         
         resolve(stickerData);
       } catch (error) {
+        console.error("Excel processing error:", error);
         reject(error);
       }
     };
@@ -69,6 +70,29 @@ export const processExcelFile = async (file: File): Promise<StickerData[]> => {
     reader.readAsArrayBuffer(file);
   });
 };
+
+// Helper function to find a matching key with more flexible matching
+function findMatchingKey(row: any, possibleMatches: string[]): string | undefined {
+  const keys = Object.keys(row);
+  
+  // First try direct match (case insensitive)
+  for (const key of keys) {
+    const keyLower = key.toLowerCase().trim();
+    if (possibleMatches.some(match => match.toLowerCase() === keyLower)) {
+      return key;
+    }
+  }
+  
+  // Then try contains match
+  for (const key of keys) {
+    const keyLower = key.toLowerCase().trim();
+    if (possibleMatches.some(match => keyLower.includes(match.toLowerCase()) || match.toLowerCase().includes(keyLower))) {
+      return key;
+    }
+  }
+  
+  return undefined;
+}
 
 export const formatCurrency = (value: number | string): string => {
   if (typeof value === 'string') {
