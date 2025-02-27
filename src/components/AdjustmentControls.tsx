@@ -1,16 +1,22 @@
 
 import React from 'react';
-import { Sliders, Printer, DownloadIcon } from 'lucide-react';
+import { Sliders, Printer, TextIcon } from 'lucide-react';
 
 interface AdjustmentControlsProps {
   width: number;
   height: number;
   columns: number;
   rows: number;
+  nameFontSize: number;
+  mrpFontSize: number;
+  priceFontSize: number;
   onWidthChange: (width: number) => void;
   onHeightChange: (height: number) => void;
   onColumnsChange: (columns: number) => void;
   onRowsChange: (rows: number) => void;
+  onNameFontSizeChange: (size: number) => void;
+  onMrpFontSizeChange: (size: number) => void;
+  onPriceFontSizeChange: (size: number) => void;
   onPrint: () => void;
   disabled?: boolean;
 }
@@ -18,12 +24,14 @@ interface AdjustmentControlsProps {
 const AdjustmentControls: React.FC<AdjustmentControlsProps> = ({
   width,
   height,
-  columns,
-  rows,
+  nameFontSize,
+  mrpFontSize,
+  priceFontSize,
   onWidthChange,
   onHeightChange,
-  onColumnsChange,
-  onRowsChange,
+  onNameFontSizeChange,
+  onMrpFontSizeChange,
+  onPriceFontSizeChange,
   onPrint,
   disabled = false
 }) => {
@@ -74,37 +82,62 @@ const AdjustmentControls: React.FC<AdjustmentControlsProps> = ({
         </div>
         
         <div className="border-t pt-4">
-          <h3 className="text-sm font-medium mb-3">Layout Settings</h3>
+          <div className="flex items-center space-x-2 mb-3">
+            <TextIcon size={16} className="text-primary" />
+            <h3 className="text-sm font-medium">Font Size Settings</h3>
+          </div>
           
-          <div className="grid grid-cols-2 gap-4">
+          <div className="space-y-4">
             <div>
-              <label htmlFor="columns-input" className="text-xs text-gray-500 block mb-1">
-                Columns
-              </label>
+              <div className="flex justify-between mb-1">
+                <label htmlFor="name-font-slider" className="text-xs text-gray-500">
+                  Product Name: {nameFontSize}px
+                </label>
+              </div>
               <input 
-                id="columns-input"
-                type="number" 
-                min="1" 
-                max="10" 
-                value={columns} 
-                onChange={(e) => onColumnsChange(parseInt(e.target.value))} 
-                className="w-full p-2 border rounded-md text-sm"
+                id="name-font-slider"
+                type="range" 
+                min="8" 
+                max="24" 
+                value={nameFontSize} 
+                onChange={(e) => onNameFontSizeChange(parseInt(e.target.value))} 
+                className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-primary"
                 disabled={disabled}
               />
             </div>
             
             <div>
-              <label htmlFor="rows-input" className="text-xs text-gray-500 block mb-1">
-                Rows
-              </label>
+              <div className="flex justify-between mb-1">
+                <label htmlFor="mrp-font-slider" className="text-xs text-gray-500">
+                  MRP: {mrpFontSize}px
+                </label>
+              </div>
               <input 
-                id="rows-input"
-                type="number" 
-                min="1" 
-                max="20" 
-                value={rows} 
-                onChange={(e) => onRowsChange(parseInt(e.target.value))} 
-                className="w-full p-2 border rounded-md text-sm"
+                id="mrp-font-slider"
+                type="range" 
+                min="6" 
+                max="18" 
+                value={mrpFontSize} 
+                onChange={(e) => onMrpFontSizeChange(parseInt(e.target.value))} 
+                className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-primary"
+                disabled={disabled}
+              />
+            </div>
+            
+            <div>
+              <div className="flex justify-between mb-1">
+                <label htmlFor="price-font-slider" className="text-xs text-gray-500">
+                  Sell Price: {priceFontSize}px
+                </label>
+              </div>
+              <input 
+                id="price-font-slider"
+                type="range" 
+                min="8" 
+                max="28" 
+                value={priceFontSize} 
+                onChange={(e) => onPriceFontSizeChange(parseInt(e.target.value))} 
+                className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-primary"
                 disabled={disabled}
               />
             </div>

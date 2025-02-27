@@ -16,6 +16,9 @@ const Index = () => {
   const [height, setHeight] = useState(40); // mm
   const [columns, setColumns] = useState(2);
   const [rows, setRows] = useState(4);
+  const [nameFontSize, setNameFontSize] = useState(14);
+  const [mrpFontSize, setMrpFontSize] = useState(10);
+  const [priceFontSize, setPriceFontSize] = useState(18);
   const { toast } = useToast();
   
   const handleFileProcessed = useCallback(async (file: File) => {
@@ -82,10 +85,16 @@ const Index = () => {
                 height={height}
                 columns={columns}
                 rows={rows}
+                nameFontSize={nameFontSize}
+                mrpFontSize={mrpFontSize}
+                priceFontSize={priceFontSize}
                 onWidthChange={setWidth}
                 onHeightChange={setHeight}
                 onColumnsChange={setColumns}
                 onRowsChange={setRows}
+                onNameFontSizeChange={setNameFontSize}
+                onMrpFontSizeChange={setMrpFontSize}
+                onPriceFontSizeChange={setPriceFontSize}
                 onPrint={handlePrint}
                 disabled={stickerData.length === 0 || isLoading}
               />
@@ -107,6 +116,9 @@ const Index = () => {
                   data={stickerData[0]} 
                   width={width} 
                   height={height} 
+                  nameFontSize={nameFontSize}
+                  mrpFontSize={mrpFontSize}
+                  priceFontSize={priceFontSize}
                 />
               </div>
             </div>
@@ -124,6 +136,9 @@ const Index = () => {
                   height={height}
                   columns={columns}
                   rows={rows}
+                  nameFontSize={nameFontSize}
+                  mrpFontSize={mrpFontSize}
+                  priceFontSize={priceFontSize}
                 />
               </div>
             </div>

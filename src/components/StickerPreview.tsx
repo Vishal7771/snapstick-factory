@@ -6,15 +6,25 @@ interface StickerPreviewProps {
   data: StickerData;
   width: number;
   height: number;
+  nameFontSize?: number;
+  mrpFontSize?: number;
+  priceFontSize?: number;
 }
 
-const StickerPreview: React.FC<StickerPreviewProps> = ({ data, width, height }) => {
+const StickerPreview: React.FC<StickerPreviewProps> = ({ 
+  data, 
+  width, 
+  height,
+  nameFontSize,
+  mrpFontSize,
+  priceFontSize
+}) => {
   const { name, mrp, sellPrice } = data;
   
-  // Calculate font sizes based on dimensions
-  const nameFontSize = Math.max(10, Math.min(16, width / 10));
-  const priceFontSize = Math.max(12, Math.min(20, width / 8));
-  const mrpFontSize = Math.max(8, Math.min(14, width / 12));
+  // Use the provided font sizes or calculate defaults based on dimensions
+  const calculatedNameFontSize = nameFontSize || Math.max(10, Math.min(16, width / 10));
+  const calculatedMrpFontSize = mrpFontSize || Math.max(8, Math.min(14, width / 12));
+  const calculatedPriceFontSize = priceFontSize || Math.max(12, Math.min(20, width / 8));
   
   return (
     <div 
@@ -28,7 +38,7 @@ const StickerPreview: React.FC<StickerPreviewProps> = ({ data, width, height }) 
     >
       <div 
         className="sticker-name"
-        style={{ fontSize: `${nameFontSize}px` }}
+        style={{ fontSize: `${calculatedNameFontSize}px` }}
       >
         {name}
       </div>
@@ -36,14 +46,14 @@ const StickerPreview: React.FC<StickerPreviewProps> = ({ data, width, height }) 
       <div className="flex flex-col items-center justify-center">
         <div 
           className="sticker-mrp"
-          style={{ fontSize: `${mrpFontSize}px` }}
+          style={{ fontSize: `${calculatedMrpFontSize}px` }}
         >
           MRP {formatCurrency(mrp)}
         </div>
         
         <div 
           className="sticker-price"
-          style={{ fontSize: `${priceFontSize}px` }}
+          style={{ fontSize: `${calculatedPriceFontSize}px` }}
         >
           {formatCurrency(sellPrice)}
         </div>
