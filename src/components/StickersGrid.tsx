@@ -12,6 +12,8 @@ interface StickersGridProps {
   nameFontSize?: number;
   mrpFontSize?: number;
   priceFontSize?: number;
+  nameSpacing?: number;
+  priceSpacing?: number;
 }
 
 const StickersGrid: React.FC<StickersGridProps> = ({ 
@@ -22,7 +24,9 @@ const StickersGrid: React.FC<StickersGridProps> = ({
   rows,
   nameFontSize,
   mrpFontSize,
-  priceFontSize
+  priceFontSize,
+  nameSpacing,
+  priceSpacing
 }) => {
   if (data.length === 0) return null;
   
@@ -59,6 +63,8 @@ const StickersGrid: React.FC<StickersGridProps> = ({
             nameFontSize={nameFontSize}
             mrpFontSize={mrpFontSize}
             priceFontSize={priceFontSize}
+            nameSpacing={nameSpacing}
+            priceSpacing={priceSpacing}
           />
         ))}
       </div>

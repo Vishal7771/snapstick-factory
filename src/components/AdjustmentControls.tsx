@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Sliders, Printer, TextIcon } from 'lucide-react';
+import { Sliders, Printer, TextIcon, SpaceIcon } from 'lucide-react';
 
 interface AdjustmentControlsProps {
   width: number;
@@ -10,6 +10,8 @@ interface AdjustmentControlsProps {
   nameFontSize: number;
   mrpFontSize: number;
   priceFontSize: number;
+  nameSpacing?: number;
+  priceSpacing?: number;
   onWidthChange: (width: number) => void;
   onHeightChange: (height: number) => void;
   onColumnsChange: (columns: number) => void;
@@ -17,6 +19,8 @@ interface AdjustmentControlsProps {
   onNameFontSizeChange: (size: number) => void;
   onMrpFontSizeChange: (size: number) => void;
   onPriceFontSizeChange: (size: number) => void;
+  onNameSpacingChange?: (spacing: number) => void;
+  onPriceSpacingChange?: (spacing: number) => void;
   onPrint: () => void;
   disabled?: boolean;
 }
@@ -27,11 +31,15 @@ const AdjustmentControls: React.FC<AdjustmentControlsProps> = ({
   nameFontSize,
   mrpFontSize,
   priceFontSize,
+  nameSpacing = 6,
+  priceSpacing = 2,
   onWidthChange,
   onHeightChange,
   onNameFontSizeChange,
   onMrpFontSizeChange,
   onPriceFontSizeChange,
+  onNameSpacingChange,
+  onPriceSpacingChange,
   onPrint,
   disabled = false
 }) => {
@@ -139,6 +147,51 @@ const AdjustmentControls: React.FC<AdjustmentControlsProps> = ({
                 onChange={(e) => onPriceFontSizeChange(parseInt(e.target.value))} 
                 className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-primary"
                 disabled={disabled}
+              />
+            </div>
+          </div>
+        </div>
+
+        <div className="border-t pt-4">
+          <div className="flex items-center space-x-2 mb-3">
+            <div className="w-4 h-4 flex items-center justify-center text-primary">↕️</div>
+            <h3 className="text-sm font-medium">Spacing Settings</h3>
+          </div>
+          
+          <div className="space-y-4">
+            <div>
+              <div className="flex justify-between mb-1">
+                <label htmlFor="name-spacing-slider" className="text-xs text-gray-500">
+                  After Product Name: {nameSpacing}px
+                </label>
+              </div>
+              <input 
+                id="name-spacing-slider"
+                type="range" 
+                min="0" 
+                max="20" 
+                value={nameSpacing} 
+                onChange={(e) => onNameSpacingChange?.(parseInt(e.target.value))} 
+                className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-primary"
+                disabled={disabled || !onNameSpacingChange}
+              />
+            </div>
+            
+            <div>
+              <div className="flex justify-between mb-1">
+                <label htmlFor="price-spacing-slider" className="text-xs text-gray-500">
+                  Between MRP and Price: {priceSpacing}px
+                </label>
+              </div>
+              <input 
+                id="price-spacing-slider"
+                type="range" 
+                min="0" 
+                max="15" 
+                value={priceSpacing} 
+                onChange={(e) => onPriceSpacingChange?.(parseInt(e.target.value))} 
+                className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-primary"
+                disabled={disabled || !onPriceSpacingChange}
               />
             </div>
           </div>

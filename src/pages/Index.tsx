@@ -19,6 +19,8 @@ const Index = () => {
   const [nameFontSize, setNameFontSize] = useState(12);
   const [mrpFontSize, setMrpFontSize] = useState(8);
   const [priceFontSize, setPriceFontSize] = useState(16);
+  const [nameSpacing, setNameSpacing] = useState(6); // Space after product name in px
+  const [priceSpacing, setPriceSpacing] = useState(2); // Space between MRP and price in px
   const { toast } = useToast();
   
   const handleFileProcessed = useCallback(async (file: File) => {
@@ -88,6 +90,8 @@ const Index = () => {
                 nameFontSize={nameFontSize}
                 mrpFontSize={mrpFontSize}
                 priceFontSize={priceFontSize}
+                nameSpacing={nameSpacing}
+                priceSpacing={priceSpacing}
                 onWidthChange={setWidth}
                 onHeightChange={setHeight}
                 onColumnsChange={setColumns}
@@ -95,6 +99,8 @@ const Index = () => {
                 onNameFontSizeChange={setNameFontSize}
                 onMrpFontSizeChange={setMrpFontSize}
                 onPriceFontSizeChange={setPriceFontSize}
+                onNameSpacingChange={setNameSpacing}
+                onPriceSpacingChange={setPriceSpacing}
                 onPrint={handlePrint}
                 disabled={stickerData.length === 0 || isLoading}
               />
@@ -119,6 +125,8 @@ const Index = () => {
                   nameFontSize={nameFontSize}
                   mrpFontSize={mrpFontSize}
                   priceFontSize={priceFontSize}
+                  nameSpacing={nameSpacing}
+                  priceSpacing={priceSpacing}
                 />
               </div>
             </div>
@@ -136,6 +144,8 @@ const Index = () => {
                   nameFontSize={nameFontSize}
                   mrpFontSize={mrpFontSize}
                   priceFontSize={priceFontSize}
+                  nameSpacing={nameSpacing}
+                  priceSpacing={priceSpacing}
                 />
               </div>
             </div>

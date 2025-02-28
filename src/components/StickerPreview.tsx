@@ -9,6 +9,8 @@ interface StickerPreviewProps {
   nameFontSize?: number;
   mrpFontSize?: number;
   priceFontSize?: number;
+  nameSpacing?: number; // Space after name
+  priceSpacing?: number; // Space between MRP and price
 }
 
 const StickerPreview: React.FC<StickerPreviewProps> = ({ 
@@ -17,7 +19,9 @@ const StickerPreview: React.FC<StickerPreviewProps> = ({
   height,
   nameFontSize,
   mrpFontSize,
-  priceFontSize
+  priceFontSize,
+  nameSpacing = 6,
+  priceSpacing = 2
 }) => {
   const { name, mrp, sellPrice } = data;
   
@@ -41,13 +45,14 @@ const StickerPreview: React.FC<StickerPreviewProps> = ({
         className="sticker-name"
         style={{ 
           fontSize: `${calculatedNameFontSize}px`,
-          color: '#000000e6' 
+          color: '#000000e6',
+          marginBottom: `${nameSpacing}px`
         }}
       >
         {name}
       </div>
       
-      <div className="flex flex-col items-center justify-center">
+      <div className="flex flex-col items-center justify-center" style={{ gap: `${priceSpacing}px` }}>
         <div 
           className="sticker-mrp"
           style={{ 
@@ -62,7 +67,7 @@ const StickerPreview: React.FC<StickerPreviewProps> = ({
           className="sticker-price"
           style={{ 
             fontSize: `${calculatedPriceFontSize}px`,
-            color: '#000000e6'  // Changed from red to black
+            color: '#000000e6'
           }}
         >
           {formatCurrency(sellPrice)}

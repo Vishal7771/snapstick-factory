@@ -63,7 +63,9 @@ export const printStickers = (printAreaId: string): void => {
     fontSizes.push({
       name: nameStyle.fontSize,
       mrp: mrpStyle.fontSize,
-      price: priceStyle.fontSize
+      price: priceStyle.fontSize,
+      nameMarginBottom: nameStyle.marginBottom,
+      priceGap: window.getComputedStyle(nameElement.parentElement.querySelector('.flex')).gap
     });
   }
   
@@ -99,8 +101,16 @@ export const printStickers = (printAreaId: string): void => {
           .sticker-name {
             font-weight: bold;
             color: #000000e6;
-            margin-bottom: 0.25rem;
+            margin-bottom: ${fontSizes[0]?.nameMarginBottom || '6px'};
             font-size: ${fontSizes[0]?.name || '0.9rem'};
+          }
+          
+          .flex {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: ${fontSizes[0]?.priceGap || '2px'};
           }
           
           .sticker-mrp {
