@@ -19,13 +19,13 @@ export const defaultPrintSettings: PrintSettings = {
   orientation: 'portrait',
   width: 210, // A4 width in mm
   height: 297, // A4 height in mm
-  columns: 4,  // Updated to 4 columns
-  rows: 4,
+  columns: 4,  // 4 columns
+  rows: 6,     // Increased to 6 rows
   margins: {
-    top: 5, // Reduced top margin
-    right: 5, // Reduced right margin
-    bottom: 5, // Reduced bottom margin
-    left: 5   // Reduced left margin
+    top: 3, // Further reduced top margin
+    right: 3, // Further reduced right margin
+    bottom: 3, // Further reduced bottom margin
+    left: 3   // Further reduced left margin
   }
 };
 
@@ -90,16 +90,16 @@ export const printStickers = (printAreaId: string): void => {
           .print-grid {
             display: grid;
             grid-template-columns: repeat(var(--columns), 1fr);
-            gap: 0.25rem;
-            padding: 0.25rem;
+            gap: 0.2rem;
+            padding: 0.2rem;
             page-break-inside: avoid;
-            margin-bottom: 0.25rem;
+            margin-bottom: 0.2rem;
           }
           
           .sticker {
             border: 1px solid #000000e6;
-            border-radius: 4px;
-            padding: 0.4rem;
+            border-radius: 2px;
+            padding: 0.3rem;
             text-align: center;
             background-color: white;
             page-break-inside: avoid;
@@ -108,8 +108,8 @@ export const printStickers = (printAreaId: string): void => {
           .sticker-name {
             font-weight: bold;
             color: #000000e6;
-            margin-bottom: ${fontSizes[0]?.nameMarginBottom || '6px'};
-            font-size: ${fontSizes[0]?.name || '0.9rem'};
+            margin-bottom: ${fontSizes[0]?.nameMarginBottom || '4px'};
+            font-size: ${fontSizes[0]?.name || '0.85rem'};
           }
           
           .flex {
@@ -123,13 +123,13 @@ export const printStickers = (printAreaId: string): void => {
           .sticker-mrp {
             color: #0006;
             text-decoration: line-through;
-            font-size: ${fontSizes[0]?.mrp || '0.8rem'};
+            font-size: ${fontSizes[0]?.mrp || '0.7rem'};
           }
           
           .sticker-price {
             font-weight: bold;
             color: #000000e6;
-            font-size: ${fontSizes[0]?.price || '1rem'};
+            font-size: ${fontSizes[0]?.price || '0.9rem'};
           }
           
           @page {

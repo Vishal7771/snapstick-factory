@@ -20,15 +20,15 @@ const StickerPreview: React.FC<StickerPreviewProps> = ({
   nameFontSize,
   mrpFontSize,
   priceFontSize,
-  nameSpacing = 6,
+  nameSpacing = 4,
   priceSpacing = 2
 }) => {
   const { name, mrp, sellPrice } = data;
   
   // Use the provided font sizes or calculate defaults based on dimensions
-  const calculatedNameFontSize = nameFontSize || Math.max(10, Math.min(16, width / 10));
-  const calculatedMrpFontSize = mrpFontSize || Math.max(8, Math.min(14, width / 12));
-  const calculatedPriceFontSize = priceFontSize || Math.max(12, Math.min(20, width / 8));
+  const calculatedNameFontSize = nameFontSize || Math.max(10, Math.min(14, width / 10));
+  const calculatedMrpFontSize = mrpFontSize || Math.max(8, Math.min(12, width / 12));
+  const calculatedPriceFontSize = priceFontSize || Math.max(12, Math.min(18, width / 8));
   
   return (
     <div 
@@ -36,7 +36,7 @@ const StickerPreview: React.FC<StickerPreviewProps> = ({
       style={{ 
         width: `${width}mm`, 
         height: `${height}mm`,
-        padding: `${Math.max(3, height / 12)}mm`, // Reduced padding
+        padding: `${Math.max(2, height / 14)}mm`, // Further reduced padding
         maxWidth: '100%',
         border: '1px solid #000000e6',
       }}

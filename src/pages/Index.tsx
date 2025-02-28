@@ -12,14 +12,14 @@ import { FileSpreadsheet, Loader2 } from 'lucide-react';
 const Index = () => {
   const [stickerData, setStickerData] = useState<StickerData[]>([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [width, setWidth] = useState(50); // mm - reduced to fit 4 columns
-  const [height, setHeight] = useState(40); // mm
-  const [columns, setColumns] = useState(4); // Changed to 4 columns
-  const [rows, setRows] = useState(4);
-  const [nameFontSize, setNameFontSize] = useState(12);
+  const [width, setWidth] = useState(45); // Reduced width to fit more items
+  const [height, setHeight] = useState(35); // Reduced height to fit more items
+  const [columns, setColumns] = useState(4); // 4 columns
+  const [rows, setRows] = useState(6); // Increased to 6 rows
+  const [nameFontSize, setNameFontSize] = useState(11); // Slightly reduced font size
   const [mrpFontSize, setMrpFontSize] = useState(8);
-  const [priceFontSize, setPriceFontSize] = useState(16);
-  const [nameSpacing, setNameSpacing] = useState(6); // Space after product name in px
+  const [priceFontSize, setPriceFontSize] = useState(14); // Slightly reduced font size
+  const [nameSpacing, setNameSpacing] = useState(4); // Reduced space after product name in px
   const [priceSpacing, setPriceSpacing] = useState(2); // Space between MRP and price in px
   const { toast } = useToast();
   
