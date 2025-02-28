@@ -60,7 +60,10 @@ const StickerPreview: React.FC<StickerPreviewProps> = ({
         
         <div 
           className="sticker-price"
-          style={{ fontSize: `${calculatedPriceFontSize}px` }}
+          style={{ 
+            fontSize: `${calculatedPriceFontSize}px`,
+            color: '#000000e6'  // Changed from red to black
+          }}
         >
           {formatCurrency(sellPrice)}
         </div>

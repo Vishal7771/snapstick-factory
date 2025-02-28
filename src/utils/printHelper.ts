@@ -45,6 +45,28 @@ export const printStickers = (printAreaId: string): void => {
     return;
   }
   
+  // Get all stickers for font size extraction
+  const stickers = printContent.querySelectorAll('.sticker');
+  
+  // Extract font sizes from the DOM elements
+  const fontSizes = [];
+  for (let i = 0; i < stickers.length && i < 1; i++) {
+    const sticker = stickers[i];
+    const nameElement = sticker.querySelector('.sticker-name');
+    const mrpElement = sticker.querySelector('.sticker-mrp');
+    const priceElement = sticker.querySelector('.sticker-price');
+    
+    const nameStyle = window.getComputedStyle(nameElement);
+    const mrpStyle = window.getComputedStyle(mrpElement);
+    const priceStyle = window.getComputedStyle(priceElement);
+    
+    fontSizes.push({
+      name: nameStyle.fontSize,
+      mrp: mrpStyle.fontSize,
+      price: priceStyle.fontSize
+    });
+  }
+  
   // Add the necessary CSS
   printWindow.document.write(`
     <html>
@@ -78,19 +100,19 @@ export const printStickers = (printAreaId: string): void => {
             font-weight: bold;
             color: #000000e6;
             margin-bottom: 0.25rem;
-            font-size: 0.9rem;
+            font-size: ${fontSizes[0]?.name || '0.9rem'};
           }
           
           .sticker-mrp {
             color: #0006;
             text-decoration: line-through;
-            font-size: 0.8rem;
+            font-size: ${fontSizes[0]?.mrp || '0.8rem'};
           }
           
           .sticker-price {
             font-weight: bold;
-            color: #FF0000;
-            font-size: 1rem;
+            color: #000000e6;
+            font-size: ${fontSizes[0]?.price || '1rem'};
           }
           
           @page {
