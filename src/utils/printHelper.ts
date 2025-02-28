@@ -22,10 +22,10 @@ export const defaultPrintSettings: PrintSettings = {
   columns: 4,  // Updated to 4 columns
   rows: 4,
   margins: {
-    top: 10,
-    right: 10,
-    bottom: 10,
-    left: 10
+    top: 5, // Reduced top margin
+    right: 5, // Reduced right margin
+    bottom: 5, // Reduced bottom margin
+    left: 5   // Reduced left margin
   }
 };
 
@@ -81,18 +81,25 @@ export const printStickers = (printAreaId: string): void => {
             box-sizing: border-box;
           }
           
+          .print-area {
+            width: 100%;
+            max-width: 100%;
+            padding: 0;
+          }
+          
           .print-grid {
             display: grid;
             grid-template-columns: repeat(var(--columns), 1fr);
-            gap: 0.5rem;
-            padding: 0.5rem;
+            gap: 0.25rem;
+            padding: 0.25rem;
             page-break-inside: avoid;
+            margin-bottom: 0.25rem;
           }
           
           .sticker {
             border: 1px solid #000000e6;
             border-radius: 4px;
-            padding: 0.5rem;
+            padding: 0.4rem;
             text-align: center;
             background-color: white;
             page-break-inside: avoid;

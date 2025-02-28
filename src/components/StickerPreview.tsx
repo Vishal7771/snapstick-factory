@@ -36,7 +36,7 @@ const StickerPreview: React.FC<StickerPreviewProps> = ({
       style={{ 
         width: `${width}mm`, 
         height: `${height}mm`,
-        padding: `${Math.max(4, height / 10)}mm`,
+        padding: `${Math.max(3, height / 12)}mm`, // Reduced padding
         maxWidth: '100%',
         border: '1px solid #000000e6',
       }}

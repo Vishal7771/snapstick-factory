@@ -50,11 +50,11 @@ const StickersGrid: React.FC<StickersGridProps> = ({
     pages.push(
       <div 
         key={`page-${page}`}
-        className="print-grid mb-8 last:mb-0"
+        className="print-grid mb-4 last:mb-0"
         style={{ 
           display: 'grid',
           gridTemplateColumns: `repeat(${columns}, 1fr)`,
-          gap: '0.5rem',
+          gap: '0.25rem',
           pageBreakAfter: page < totalPages - 1 ? 'always' : 'auto'
         }}
       >
