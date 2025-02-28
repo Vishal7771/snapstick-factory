@@ -132,6 +132,11 @@ export const printStickers = (printAreaId: string): void => {
                     ${defaultPrintSettings.margins.bottom}mm 
                     ${defaultPrintSettings.margins.left}mm;
           }
+          
+          /* Ensure page breaks work properly */
+          .print-grid[style*="page-break-after: always"] {
+            page-break-after: always;
+          }
         </style>
       </head>
       <body>

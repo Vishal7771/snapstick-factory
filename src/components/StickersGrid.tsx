@@ -30,33 +30,37 @@ const StickersGrid: React.FC<StickersGridProps> = ({
 }) => {
   if (data.length === 0) return null;
   
-  // Calculate how many stickers to display based on rows and columns
-  const maxStickersToShow = columns * rows;
-  const stickersToRender = data.slice(0, maxStickersToShow);
+  // Instead of limiting the products, show all of them
+  // Organize them into pages based on the grid size
+  const itemsPerPage = columns * rows;
+  const totalPages = Math.ceil(data.length / itemsPerPage);
   
-  // Fill remaining slots with the first sticker
-  const filledStickers = [...stickersToRender];
-  
-  while (filledStickers.length < maxStickersToShow) {
-    filledStickers.push(data[0]);
-  }
-  
-  return (
-    <div 
-      id="print-area" 
-      className="print-area"
-    >
+  const pages = [];
+  for (let page = 0; page < totalPages; page++) {
+    const startIndex = page * itemsPerPage;
+    const endIndex = Math.min(startIndex + itemsPerPage, data.length);
+    const pageData = data.slice(startIndex, endIndex);
+    
+    // Fill the last page if it's not complete
+    const filledPageData = [...pageData];
+    while (filledPageData.length < itemsPerPage) {
+      filledPageData.push(data[0]);
+    }
+    
+    pages.push(
       <div 
-        className="print-grid"
+        key={`page-${page}`}
+        className="print-grid mb-8 last:mb-0"
         style={{ 
           display: 'grid',
           gridTemplateColumns: `repeat(${columns}, 1fr)`,
           gap: '0.5rem',
+          pageBreakAfter: page < totalPages - 1 ? 'always' : 'auto'
         }}
       >
-        {filledStickers.map((sticker, index) => (
+        {filledPageData.map((sticker, index) => (
           <StickerPreview 
-            key={index}
+            key={`${page}-${index}`}
             data={sticker}
             width={width}
             height={height}
@@ -68,6 +72,12 @@ const StickersGrid: React.FC<StickersGridProps> = ({
           />
         ))}
       </div>
+    );
+  }
+  
+  return (
+    <div id="print-area" className="print-area">
+      {pages}
     </div>
   );
 };
